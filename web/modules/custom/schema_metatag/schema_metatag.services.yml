@@ -1,0 +1,4 @@
+services:
+  schema_metatag.schema_services:
+    class: Drupal\schema_metatag\SchemaService
+    

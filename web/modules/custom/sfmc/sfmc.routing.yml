@@ -1,0 +1,10 @@
+sfmc.settings_form:
+  path: '/admin/config/config-settings'
+  defaults:
+    _form: '\Drupal\sfmc\Form\SfmcConfigForm'
+    _title: 'SFMC Config Settings'
+  requirements:
+    _permission: 'administer site configuration'
+    _csrf_token: 'TRUE'
+  options:
+    _admin_route: TRUE

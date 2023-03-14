@@ -1,0 +1,5 @@
+sfmc.admin_settings:
+  title: 'SFMC Config'
+  description: 'SFMC Configurations'
+  route_name: sfmc.settings_form
+  parent: 'system.admin_config_system'

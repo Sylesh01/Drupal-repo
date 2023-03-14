@@ -1,0 +1,6 @@
+schema_metatag.settings_form:
+  title: Schema Configuration 
+  description: Configure custom form.
+  parent: system.admin_config_system
+  route_name: schema_metatag.settings_form
+  weight: 10

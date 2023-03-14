@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function example_module_menu() {
+  $items = [];
+
+  $items['example_controller'] = [
+    'title' => 'Example Controller',
+    'description' => 'An example controller that uses all the four methods in REST API',
+    'page callback' => '\Drupal\example_module\Controller\ExampleController::index',
+    'access callback' => 'TRUE',
+    'type' => 'json',
+    'methods' => ['GET', 'POST', 'PATCH', 'DELETE'],
+  ];
+
+  return $items;
+}

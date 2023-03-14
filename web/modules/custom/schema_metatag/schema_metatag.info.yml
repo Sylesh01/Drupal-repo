@@ -1,0 +1,5 @@
+name: Custom Schema Metatag Module
+description: Used to write custom schema metatags for required Pages
+core_version_requirement: ^9 || ^8
+package: custom
+type: module

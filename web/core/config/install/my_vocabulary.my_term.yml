@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: my_vocabulary.my_term
+vid: my_vocabulary
+name: 'My Term'
+description: 'This is a description for My Term.'
+weight: 0

@@ -1,0 +1,75 @@
+<?php
+use \Drupal\node\Entity\Node; 
+use Drupal\Core\Render\Markup;
+use Drupal\taxonomy\Entity\Term;
+
+function schema_metatag_preprocess_html(&$var){
+$current_path = \Drupal::service('path.current')->getPath();
+$current_path = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+$displayPage= \Drupal::config('schema_form.settings')->get('displaypage');
+$displayPage = preg_replace('/\s/','',$displayPage);
+$displayPage = explode('|',$displayPage);
+if(in_array($current_path,$displayPage)){
+    $nids = \Drupal::entityQuery('node')->condition('type', 'faq')->execute();
+    $nodes = Node::loadMultiple($nids);
+    $faqSchema = \Drupal::service('schema_metatag.schema_services')->prepareFaqSchema($nodes);
+    $string = [
+        '#tag' => 'script',
+        '#attributes' => ['type' => 'application/ld+json',],
+            '#value' => Markup::create($faqSchema),
+        ];
+        $var['page']['#attached']['html_head'][]= [$string,'FAQ Schema'];
+}
+}
+function schema_metatag_preprocess_page(&$var){
+    $vid = "new_vocabulary";
+    $name = "New Vocabulary";
+
+    $vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
+    if (!isset($vocabularies[$vid])) {
+    $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
+            'vid' => $vid,
+            'description' => '',
+            'name' => $name,
+    ))->save();
+    
+    $categories = ['term 1', 'term 2', 'term 3', 'term 4'];
+    foreach ($categories as $category) {
+    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->create([
+        'name' => $category,
+        'vid' => $vid,
+    ])->save();
+    }
+    }
+    else {
+    
+    }
+    $vid = "test_vocabulary";
+    $vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
+    if (!isset($vocabularies[$vid])) {
+        $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->create([
+            'name' => 'test term 2',
+            'vid' => $vid,
+        ])->save();
+    }
+        else{
+
+     }
+    $qid = \Drupal::entityQuery('taxonomy_term')->condition('vid', "test_vocabulary")->execute();
+    $terms = Term::loadMultiple($qid);
+    foreach ($terms as $term) {
+    $names[] = $term->name->value;
+    }
+    $name= 'test term2';
+    if(!in_array($name,$names)){
+        $new_term = Term::create([
+            'vid' => 'test_vocabulary',
+            'name' => $name,
+          ]);
+          
+          $new_term->enforceIsNew();
+          $new_term->save();
+    }
+    else{
+    }
+}

@@ -1,0 +1,7 @@
+schema_metatag.settings_form:
+  path: '/admin/config/system/schema-form'
+  defaults: 
+    _form: 'Drupal\schema_metatag\Form\SchemaForm'
+    _title: 'Schema configration Form'
+  requirements:
+    _permission: 'administer schema_metatag configuration'

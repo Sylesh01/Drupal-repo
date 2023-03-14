@@ -1,0 +1,34 @@
+example_module.index:
+  path: '/example'
+  defaults:
+    _controller: '\Drupal\example_module\Controller\ExampleController::index'
+    _title: 'Example Page'
+  requirements:
+    _permission: 'access content'
+
+example_module.create:
+  path: '/example/create'
+  defaults:
+    _controller: '\Drupal\example_module\Controller\ExampleController::createController'
+    _title: 'Create Example'
+  methods: [POST]
+  requirements:
+    _permission: 'create content'
+
+example_module.update:
+  path: '/example/{id}/update'
+  defaults:
+    _controller: '\Drupal\example_module\Controller\ExampleController::update'
+    _title: 'Update Example'
+  methods: [PUT, PATCH]
+  requirements:
+    _permission: 'edit any content'
+
+example_module.delete:
+  path: '/example/{id}/delete'
+  defaults:
+    _controller: '\Drupal\example_module\Controller\ExampleController::delete'
+    _title: 'Delete Example'
+  methods: [DELETE]
+  requirements:
+    _permission: 'delete any content'
