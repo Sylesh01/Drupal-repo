@@ -4,10 +4,10 @@
     $('#phone-number-field').on('blur', function validatePhoneNumber() {
       var phoneNum = $(this).val().replace(/\D/g, '');
       if (phoneNum.length != 10) {
-        $('.nameerr').html('Please enter a valid 10-digit phone number.');
+        $('.phoneerr').html('Please enter a valid 10-digit phone number.');
         hasError = true;
       } else {
-        $('.nameerr').html('');
+        $('.phoneerr').html('');
         hasError = false;
         $('#phone-number-field').off('blur', validatePhoneNumber);
       }
